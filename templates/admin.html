@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Carlos Ramírez">
+    <title>Administrador</title>
+    <!--Creamos el link con Bootstrap para poder usar sus librerías-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <!--Vincula el fichero HTML a la hoja de estilo en CSS en la carpeta static-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+
+<body>
+    <header>
+        <!--Contiene la imagen y el texto inicial de la web-->
+        <div class="container-fluid" style="background-color: #ffcd25d9;">
+            <div class="row-cols-md-5 offset-md-1 my-auto">
+                <img src="../static/img/index/genero.png" alt="Imagen junto al texto principal" style="width: 50px;">
+                <h7> Descubre el arte del placer en nuestra tienda online </h7>
+            </div>
+        </div>
+    </header>
+    <!--Barra de Navegación-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand">⏣ Tantásia ⏣</a>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Salir</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/admin_crear">Crear Producto</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/admin_modificar">Modificar Producto</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/admin_eliminar">Eliminar Producto</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!--Cabecera Grande-->
+    <header class="py-1" style="background-color: #ffcd25d9;">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-black-60">
+                <h1 class="display-4 fw-bolder">Productos en la Base de Datos</h1>
+                <h6 class="display-4 fw-bolder" style="color: red; font-size: 150%;">
+                    {% if mensaje %}
+                        {{ mensaje }}
+                    {% endif %}
+                </h6>
+            </div>
+        </div>
+    </header>
+
+    <div class="container-fluid" style="padding: 30px;">
+        <div class="row">
+            <table class="table table-striped table-hover caption-top">
+                <caption>Lista de Productos</caption>
+                <thead>
+                    <!-- Cabecera de la Tabla-->
+                    <tr>
+                        <th>Re_Producto</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Categoria</th>
+                        <th>Fecha_Fabricación</th>
+                        <th>Imagen</th>
+                    </tr>
+                </thead>
+                <body>
+                    <!-- Datos de los productos por filas-->
+                    <!-- Datos de Producto-->
+                    <tr>
+                        <td>{% if 0 < data|length and data[0].ref_producto is defined %}
+                            {{ data[0].ref_producto }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 0 < data|length and data[0].nombre is defined %}
+                            {{ data[0].nombre }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 0 < data|length and data[0].descripcion is defined %}
+                            {{ data[0].descripcion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 0 < data|length and data[0].precio is defined %}
+                            {{ data[0].precio }}€
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 0 < data|length and data[0].cantidad is defined %}
+                            {{ data[0].cantidad }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 0 < data|length and data[0].categoria is defined %}
+                            {{ data[0].categoria }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 0 < data|length and data[0].fecha_fabricacion is defined %}
+                            {{ data[0].fecha_fabricacion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 0 < data|length and data[0].imagen is defined %}
+                            {{ data[0].imagen }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <!--Datos de Producto-->
+                    <tr>
+                        <td>{% if 1 < data|length and data[1].ref_producto is defined %}
+                            {{ data[1].ref_producto }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 1 < data|length and data[1].nombre is defined %}
+                            {{ data[1].nombre }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 1 < data|length and data[1].descripcion is defined %}
+                            {{ data[1].descripcion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 1 < data|length and data[1].precio is defined %}
+                            {{ data[1].precio }}€
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 1 < data|length and data[1].cantidad is defined %}
+                            {{ data[1].cantidad }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 1 < data|length and data[1].categoria is defined %}
+                            {{ data[1].categoria }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 1 < data|length and data[1].fecha_fabricacion is defined %}
+                            {{ data[1].fecha_fabricacion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 1 < data|length and data[1].imagen is defined %}
+                            {{ data[1].imagen }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <!--Datos de Producto-->
+                    <tr>
+                        <td>{% if 2 < data|length and data[2].ref_producto is defined %}
+                            {{ data[2].ref_producto }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 2 < data|length and data[2].nombre is defined %}
+                            {{ data[2].nombre }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 2 < data|length and data[2].descripcion is defined %}
+                            {{ data[1].descripcion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 2 < data|length and data[2].precio is defined %}
+                            {{ data[2].precio }}€
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 2 < data|length and data[2].cantidad is defined %}
+                            {{ data[2].cantidad }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 2 < data|length and data[2].categoria is defined %}
+                            {{ data[2].categoria }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 2 < data|length and data[2].fecha_fabricacion is defined %}
+                            {{ data[2].fecha_fabricacion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 2 < data|length and data[2].imagen is defined %}
+                            {{ data[2].imagen }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <!--Datos de Producto-->
+                    <tr>
+                        <td>{% if 3 < data|length and data[3].ref_producto is defined %}
+                            {{ data[3].ref_producto }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 3 < data|length and data[3].nombre is defined %}
+                            {{ data[3].nombre }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 3 < data|length and data[3].descripcion is defined %}
+                            {{ data[3].descripcion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 3 < data|length and data[3].precio is defined %}
+                            {{ data[3].precio }}€
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 3 < data|length and data[3].cantidad is defined %}
+                            {{ data[3].cantidad }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 3 < data|length and data[3].categoria is defined %}
+                            {{ data[3].categoria }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 3 < data|length and data[3].fecha_fabricacion is defined %}
+                            {{ data[3].fecha_fabricacion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 3 < data|length and data[3].imagen is defined %}
+                            {{ data[3].imagen }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <!--Datos de Producto-->
+                    <tr>
+                        <td>{% if 4 < data|length and data[4].ref_producto is defined %}
+                            {{ data[4].ref_producto }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 4 < data|length and data[4].nombre is defined %}
+                            {{ data[4].nombre }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 4 < data|length and data[4].descripcion is defined %}
+                            {{ data[4].descripcion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 4 < data|length and data[4].precio is defined %}
+                            {{ data[4].precio }}€
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 4 < data|length and data[4].cantidad is defined %}
+                            {{ data[4].cantidad }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 4 < data|length and data[4].categoria is defined %}
+                            {{ data[4].categoria }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 4 < data|length and data[4].fecha_fabricacion is defined %}
+                            {{ data[4].fecha_fabricacion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 4 < data|length and data[4].imagen is defined %}
+                            {{ data[4].imagen }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <!--Datos de Producto-->
+                    <tr>
+                        <td>{% if 5 < data|length and data[5].ref_producto is defined %}
+                            {{ data[5].ref_producto }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 5 < data|length and data[5].nombre is defined %}
+                            {{ data[5].nombre }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 5 < data|length and data[5].descripcion is defined %}
+                            {{ data[5].descripcion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 5 < data|length and data[5].precio is defined %}
+                            {{ data[5].precio }}€
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 5 < data|length and data[5].cantidad is defined %}
+                            {{ data[5].cantidad }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 5 < data|length and data[5].categoria is defined %}
+                            {{ data[5].categoria }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 5 < data|length and data[5].fecha_fabricacion is defined %}
+                            {{ data[5].fecha_fabricacion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 5 < data|length and data[5].imagen is defined %}
+                            {{ data[5].imagen }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <!--Datos de Producto-->
+                    <tr>
+                        <td>{% if 6 < data|length and data[6].ref_producto is defined %}
+                            {{ data[6].ref_producto }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 6 < data|length and data[6].nombre is defined %}
+                            {{ data[6].nombre }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 6 < data|length and data[6].descripcion is defined %}
+                            {{ data[6].descripcion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 6 < data|length and data[6].precio is defined %}
+                            {{ data[6].precio }}€
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 6 < data|length and data[6].cantidad is defined %}
+                            {{ data[6].cantidad }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 6 < data|length and data[6].categoria is defined %}
+                            {{ data[6].categoria }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 6 < data|length and data[6].fecha_fabricacion is defined %}
+                            {{ data[6].fecha_fabricacion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 6 < data|length and data[6].imagen is defined %}
+                            {{ data[6].imagen }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <!--Datos de Producto-->
+                    <tr>
+                        <td>{% if 7 < data|length and data[7].ref_producto is defined %}
+                            {{ data[7].ref_producto }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 7 < data|length and data[7].nombre is defined %}
+                            {{ data[7].nombre }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 7 < data|length and data[7].descripcion is defined %}
+                            {{ data[7].descripcion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 7 < data|length and data[7].precio is defined %}
+                            {{ data[7].precio }}€
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 7 < data|length and data[7].cantidad is defined %}
+                            {{ data[7].cantidad }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 7 < data|length and data[7].categoria is defined %}
+                            {{ data[7].categoria }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 7 < data|length and data[7].fecha_fabricacion is defined %}
+                            {{ data[7].fecha_fabricacion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 7 < data|length and data[7].imagen is defined %}
+                            {{ data[7].imagen }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <!--Datos de Producto-->
+                    <tr>
+                        <td>{% if 8 < data|length and data[8].ref_producto is defined %}
+                            {{ data[8].ref_producto }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 8 < data|length and data[8].nombre is defined %}
+                            {{ data[8].nombre }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 8 < data|length and data[6].descripcion is defined %}
+                            {{ data[8].descripcion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 8 < data|length and data[8].precio is defined %}
+                            {{ data[8].precio }}€
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 8 < data|length and data[8].cantidad is defined %}
+                            {{ data[8].cantidad }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 8 < data|length and data[8].categoria is defined %}
+                            {{ data[8].categoria }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 8 < data|length and data[8].fecha_fabricacion is defined %}
+                            {{ data[8].fecha_fabricacion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 8 < data|length and data[8].imagen is defined %}
+                            {{ data[8].imagen }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <!--Datos de Producto-->
+                    <tr>
+                        <td>{% if 9 < data|length and data[9].ref_producto is defined %}
+                            {{ data[9].ref_producto }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 9 < data|length and data[9].nombre is defined %}
+                            {{ data[9].nombre }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 9 < data|length and data[9].descripcion is defined %}
+                            {{ data[9].descripcion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 9 < data|length and data[9].precio is defined %}
+                            {{ data[9].precio }}€
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 9 < data|length and data[9].cantidad is defined %}
+                            {{ data[9].cantidad }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 9 < data|length and data[9].categoria is defined %}
+                            {{ data[9].categoria }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 9 < data|length and data[9].fecha_fabricacion is defined %}
+                            {{ data[9].fecha_fabricacion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 9 < data|length and data[9].imagen is defined %}
+                            {{ data[9].imagen }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <!--Datos de Producto-->
+                    <tr>
+                        <td>{% if 10 < data|length and data[10].ref_producto is defined %}
+                            {{ data[10].ref_producto }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 10 < data|length and data[10].nombre is defined %}
+                            {{ data[10].nombre }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 10 < data|length and data[10].descripcion is defined %}
+                            {{ data[10].descripcion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 10 < data|length and data[10].precio is defined %}
+                            {{ data[10].precio }}€
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 10 < data|length and data[10].cantidad is defined %}
+                            {{ data[10].cantidad }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 10 < data|length and data[10].categoria is defined %}
+                            {{ data[10].categoria }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 10 < data|length and data[10].fecha_fabricacion is defined %}
+                            {{ data[10].fecha_fabricacion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 10 < data|length and data[10].imagen is defined %}
+                            {{ data[10].imagen }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <!--Datos de Producto-->
+                    <tr>
+                        <td>{% if 11 < data|length and data[11].ref_producto is defined %}
+                            {{ data[11].ref_producto }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 11 < data|length and data[11].nombre is defined %}
+                            {{ data[11].nombre }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 11 < data|length and data[11].descripcion is defined %}
+                            {{ data[11].descripcion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 11 < data|length and data[11].precio is defined %}
+                            {{ data[11].precio }}€
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 11 < data|length and data[11].cantidad is defined %}
+                            {{ data[11].cantidad }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 11 < data|length and data[11].categoria is defined %}
+                            {{ data[11].categoria }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 11 < data|length and data[11].fecha_fabricacion is defined %}
+                            {{ data[11].fecha_fabricacion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 11 < data|length and data[11].imagen is defined %}
+                            {{ data[11].imagen }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <!--Datos de Producto-->
+                    <tr>
+                        <td>{% if 12 < data|length and data[12].ref_producto is defined %}
+                            {{ data[12].ref_producto }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 12 < data|length and data[12].nombre is defined %}
+                            {{ data[12].nombre }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 12 < data|length and data[12].descripcion is defined %}
+                            {{ data[12].descripcion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 12 < data|length and data[12].precio is defined %}
+                            {{ data[12].precio }}€
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 12 < data|length and data[12].cantidad is defined %}
+                            {{ data[12].cantidad }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 12 < data|length and data[12].categoria is defined %}
+                            {{ data[12].categoria }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 12 < data|length and data[12].fecha_fabricacion is defined %}
+                            {{ data[12].fecha_fabricacion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 12 < data|length and data[12].imagen is defined %}
+                            {{ data[12].imagen }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <!--Datos de Producto-->
+                    <tr>
+                        <td>{% if 13 < data|length and data[13].ref_producto is defined %}
+                            {{ data[13].ref_producto }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 13 < data|length and data[13].nombre is defined %}
+                            {{ data[13].nombre }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 13 < data|length and data[13].descripcion is defined %}
+                            {{ data[13].descripcion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 13 < data|length and data[13].precio is defined %}
+                            {{ data[13].precio }}€
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 13 < data|length and data[13].cantidad is defined %}
+                            {{ data[13].cantidad }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 13 < data|length and data[13].categoria is defined %}
+                            {{ data[13].categoria }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 13 < data|length and data[13].fecha_fabricacion is defined %}
+                            {{ data[13].fecha_fabricacion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 13 < data|length and data[13].imagen is defined %}
+                            {{ data[13].imagen }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <!--Datos de Producto-->
+                    <tr>
+                        <td>{% if 14 < data|length and data[14].ref_producto is defined %}
+                            {{ data[14].ref_producto }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 14 < data|length and data[14].nombre is defined %}
+                            {{ data[14].nombre }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 14 < data|length and data[14].descripcion is defined %}
+                            {{ data[14].descripcion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 14 < data|length and data[14].precio is defined %}
+                            {{ data[14].precio }}€
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 14 < data|length and data[14].cantidad is defined %}
+                            {{ data[14].cantidad }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 14 < data|length and data[14].categoria is defined %}
+                            {{ data[14].categoria }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 14 < data|length and data[14].fecha_fabricacion is defined %}
+                            {{ data[14].fecha_fabricacion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 14 < data|length and data[14].imagen is defined %}
+                            {{ data[14].imagen }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <!--Datos de Producto-->
+                    <tr>
+                        <td>{% if 15 < data|length and data[15].ref_producto is defined %}
+                            {{ data[15].ref_producto }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 15 < data|length and data[15].nombre is defined %}
+                            {{ data[15].nombre }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 15 < data|length and data[15].descripcion is defined %}
+                            {{ data[15].descripcion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 15 < data|length and data[15].precio is defined %}
+                            {{ data[15].precio }}€
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 15 < data|length and data[15].cantidad is defined %}
+                            {{ data[15].cantidad }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 15 < data|length and data[15].categoria is defined %}
+                            {{ data[15].categoria }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 15 < data|length and data[15].fecha_fabricacion is defined %}
+                            {{ data[15].fecha_fabricacion }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>{% if 15 < data|length and data[15].imagen is defined %}
+                            {{ data[15].imagen }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                </body>
+            </table>
+        </div>
+    </div>
+        <!-- Footer-->
+    <div class="container-fluid">
+        <footer class="py-5" style="background-color: #ffcd25d9;">
+            <div class="container"><p class="m-0 text-center text-black-50">Copyright &copy; ⏣ Tantásia ⏣</p></div>
+        </footer>
+    </div>
+</body>
+</html>

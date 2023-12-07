@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Carlos Ramírez">
+    <title>login</title>
+    <!--Creamos el link con Bootstrap para poder usar sus librerías-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <!--Vincula el fichero HTML a la hoja de estilo en CSS en la carpeta static-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+
+<body class="text-center body_login" style="background-color: #f9f9f9d9;">
+    <div class="container" style="background-color: #ffcd25d9; border-radius: 20px;">
+        <div class="row-cols-auto mb-5"></div>
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <form class="form-signin" action="/validar_usuario" method="post">
+                    <img class="mb-2" src="../static/img/index/genero.png" alt="" width="72">
+                    <h1 class="h1 mb-4 fw-lighter"> Bienvenido </h1>
+                    <div class="form-floating">
+                        <input type="text" class="form-control"name="nombre_usuario" autofocus>
+                        <label for="nombre_usuario">Usuario</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" name="password" maxlength="4">
+                        <label for="password">Contraseña</label>
+                    </div>
+                    <div class="checkbox mb-3"></div>
+                    <button class="w-100 btn btn-lg btn-primary" type="submit"> Ingresar </button>
+                </form>
+                <!--Muestro un mensaje de error al usuario, cuando la URL devuelve la variable error-->
+                {% if error %}
+                <div class="error-message">
+                    <p style="color: red; padding: 10px;"> {{ error }} </p>
+                </div>
+                {% endif %}
+
+                <a href="/" class="w-100 btn btn-lg btn-danger" type="submit"> Volver </a>
+                <p class="mt-5 mb-3 text-muted">© ⏣ Tantásia ⏣</p>
+            </div>
+            <div class="col-4">
+                <h7> Nota Cristian: admin - 1234</h7>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

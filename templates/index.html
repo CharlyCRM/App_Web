@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="author" content="Carlos Ramírez">
+        <title>Tantásia</title>
+        <!--Creamos el link con Bootstrap para poder usar sus librerías-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        <!--Vincula el fichero HTML a la hoja de estilo en CSS en la carpeta static-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    </head>
+
+    <body>
+        <header>
+            <!--Contiene la imagen y el texto inicial de la web-->
+            <div class="container-fluid" style="background-color: #ffcd25d9;">
+                <div class="row-cols-md-5 offset-md-1 my-auto">
+                    <img src="../static/img/index/genero.png" alt="Imagen junto al texto principal" style="width: 50px;">
+                    <h7> Descubre el arte del placer en nuestra tienda online </h7>
+                </div>
+            </div>
+        </header>
+            <!--Contenedor creado para generar una fila de 30px de separación-->
+        <div class="container-fluid" style="height: 30px; background-color: white"></div>
+        <!--Barra de botones y accesos-->
+        <div class="container-fluid" style="text-align: center;">
+            <div class="row-cols-lg-1">
+                <h1 class="encabezado titulo_principal"> ⏣ Tantásia ⏣ </h1>
+            </div>
+        </div>
+        <!--Menu Principal en la cabecera-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand">⏣ Tantásia ⏣</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/tienda">Tienda</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/registro">Regístrate</a>
+                        </li>
+                            <!--Conecta este boton con la función login definda en main.py-->
+                            <a class="nav-link" href="/login">Administrador</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!--Carrusel de Imágenes-->
+        <div class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="../static/img/index/carousel/img1.jpg" class="d-block w-100" alt="máscara roja">
+                </div>
+                <div class="carousel-item">
+                    <img src="../static/img/index/carousel/img2.jpg" class="d-block w-100" alt="látigo rojo">
+                </div>
+                <div class="carousel-item">
+                    <img src="../static/img/index/carousel/img3.jpg" class="d-block w-100" alt="colección vibradores">
+                </div>
+                <div class="carousel-item">
+                    <img src="../static/img/index/carousel/img4.jpg" class="d-block w-100" alt="grilletes">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+        </div>
+        <!--Contenedor con menajes sobre caracteristicas de venta-->
+        <div class="container-fluid text-center" style="background-color: #ffcd25d9;">
+            <div class="row titulo_encabezado ">
+                <div class="col-3"></div>
+                <div class="col-6" style="padding-top: 10px;">
+                    <h7> Descubre los juguetitos que te harán ¡volver a jugar! </h7>
+                </div>
+                <div class="col-3"></div>
+            </div>
+        </div>
+        <!--Mensajes de venta-->
+        <div class="container-fluid text-center" style="background-color: #ffcd25d9; padding-top: 10px;">
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h6> Calidad Premium </h6>
+                </div>
+                <div class="col-2 text-center">
+                    <h6> Total Discrepción </h6>
+                </div>
+                <div class="col-2 text-center">
+                    <h6> Garantía de 2 años </h6>
+                </div>
+                <div class="col-4 text-center">
+                    <h6> Pago 100% Seguro </h6>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid producto_destacado" style="padding-top: 10px;">
+            <h7> Nuestros Productos más Destacados</h7>
+        </div>
+        <!--Tarjetas con Productos destacados-->
+        <div class="container">
+            <div class="card-group">
+                <div class="card">
+                        <img class="card-img-top" src="{{ data[0].imagen }}" alt="Imagen car_group toy1">
+                        <div class="card-body" name="ref_producto">
+                            <h5 class="card-title text-center">{{ data[0].nombre }}</h5>
+                            <p class="card-text">{{ data[0].descripcion }}</p>
+                            <p class="card-text"><small class="text-muted">Últimos productos en stock</small></p>
+                        </div>
+                    </form>
+                </div>
+                <div class="card">
+                        <img class="card-img-top" src="{{ data[1].imagen }}" alt="Imagen car_group toy1">
+                        <div class="card-body" name="ref_producto">
+                            <h5 class="card-title text-center">{{ data[1].nombre }}</h5>
+                            <p class="card-text">{{ data[1].descripcion }}</p>
+                            <p class="card-text"><small class="text-muted">Últimos productos en stock</small></p>
+                        </div>
+                    </form>
+                </div>
+                <div class="card">
+                        <img src="{{ data[2].imagen }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ data[2].nombre }}</h5>
+                            <p class="card-text">{{ data[2].descripcion }}.</p>
+                            <p class="card-text"><small class="text-muted">Última actualización hace 3 minutos</small></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!--Tarjetas con Productos destacados-->
+        <div class="container">
+            <div class="card-group">
+                <div class="card">
+                        <img class="card-img-top" src="{{ data[3].imagen }}" alt="Imagen car_group toy1">
+                        <div class="card-body" name="ref_producto">
+                            <h5 class="card-title text-center">{{ data[3].nombre }}</h5>
+                            <p class="card-text">{{ data[3].descripcion }}</p>
+                            <p class="card-text"><small class="text-muted">Últimos productos en stock</small></p>
+                        </div>
+                    </form>
+                </div>
+                <div class="card">
+                        <img class="card-img-top" src="{{ data[4].imagen }}" alt="Imagen car_group toy1">
+                        <div class="card-body" name="ref_producto">
+                            <h5 class="card-title text-center">{{ data[4].nombre }}</h5>
+                            <p class="card-text">{{ data[4].descripcion }}</p>
+                            <p class="card-text"><small class="text-muted">Últimos productos en stock</small></p>
+                        </div>
+                    </form>
+                </div>
+                <div class="card">
+                        <img src="{{ data[5].imagen }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ data[5].nombre }}</h5>
+                            <p class="card-text">{{ data[5].descripcion }}.</p>
+                            <p class="card-text"><small class="text-muted">Última actualización hace 3 minutos</small></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjetas con mensajes destacados-->
+        <div class="container" style="padding-top: 30px;">
+            <div class="row">
+                <div class="col-6">
+                    <div class="card text-center" style="background-color: #fedacdd9; border-color: red;">
+                        <div class="card-header">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">¿No sabes qué elegir?</h5>
+                            <p class="card-text">Descrube todos nuestros juguetes en nuestro amplio catálogo.
+                                Prueba, Experimenta y Disfruta
+                            </p>
+                            <a href="/tienda" class="btn btn-primary">Tienda</a>
+                        </div>
+                        <div class="card-footer text-muted">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card text-center" style="background-color: #fed4ebd9; border-color: purple;">
+                        <div class="card-header">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Disfruta Primero y Paga Despues</h5>
+                            <p class="card-text">Paga en 3 meses sin Intereses,
+                                o consulta nuestros métodos de financiación
+                            </p>
+                            <a href="/carrito" class="btn btn-primary">Más Información</a>
+                        </div>
+                        <div class="card-footer text-muted">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Texto caracteristicas de la Marca-->
+        <div class="container" style="padding-top: 20px; background-color: white;"></div>
+        <div class="container-fluid" style="padding-top: 20px; background-color: #f9f9f9d9;">
+            <div class="row-cols-md-1 m-lg-1">
+                <h5> Creamos y Diseñamos juguetes para nuestra tienda erótica</h5>
+                <p>En Tantásia tenemos claro que el sexo ya no es un tabú. Vemos el sexo de manera tan natural como salir a cenar, 
+                    hacer deporte o ir al cine. Pensamos que el sexo es como todo lo realmente importante en la vida, 
+                    y que requiere de su tiempo y dedicación. 
+                    Por eso somos el punto de encuentro para todas esas personas que desean ganar seguridad en sí mismas, 
+                    mejorar la complicidad con la pareja y en definitiva, ser más felices.
+                </p>
+                <h5>El sex shop con productos de mayor calidad</h5>
+                <p>En nuestro sex shop encontrarás todas las herramientas necesarias para disfrutar de más y mejor diversión. 
+                    A diferencia de otros sex shop, aquí sólo encontrarás lo que creemos de todo corazón que merece estar aquí, 
+                    y no miles de referencias entre las que rebuscar... 
+                    Porque nunca te vamos a recomendar un juguete que nosotr@s jamás utilizaríamos.
+                </p>
+                <h5>Tantásia, el Sex Shop Online mayor confianza entre los españoles</h5>
+                <p>Tantásia no es sólo un Sex Shop on-line... Somos una marca de juguetes sexuales, diseñamos y fabricamos nuestros propios juguetes. 
+                    Así pues, a diferencia de otros sexshop en-linea con miles de referencias, en Tantásia encontrarás nuestros juguetes,
+                    fabricados por nosotros con materiales de máxima calidad, con un gran diseño y funcionalidad, y una selección de productos de terceros innovadores.
+                </p>
+                <h5>Sex Shop on-line con juguetes saludables y libres de tóxicos</h5>
+                <p>Todos los juguetes de nuestro sex shop son 100% saludables y libres de tóxicos como los ftalatos o los parabenos. 
+                    Si tienes dudas o preguntas siempre puedes contactar con l@s expert@s de Tantásia mediante e-mail, 
+                    quienes estarán encantad@s de ayudarte y te asesorarán sin compromiso para que encuentres los productos que realmente necesitas. 
+                    En la Eroteca de Tantásia, así como en las redes sociales, encontrarás artículos divulgativos acerca de la sexualidad.
+                </p>
+                <h5>Productos de Sex Shop de Calidad</h5>
+                <P>En la gama de artículos eróticos y juguetes sexuales disponemos de varios tipos de vibradores (vibradores conejito, vibradores y masajeadores de clítoris, vibradores para el Punto G, vibradores discretos...), 
+                    succionadores de clítoris como el Mambo o el Satisfyer Pro 2, nuestras bolas chinas para ejercitar el suelo pélvico y realizar ejercicios de Kegel, 
+                    nuestros anillos para el pene, masturbadores masculinos, o productos y juguetes para el sexo anal, entre otros muchos más.
+                </P>
+                <h5>Artículos eróticos y juguetes sexuales para conseguir una vida sexual plena</h5>
+                <p>Cómo buen sexshop online también disponemos de una selección de lubricantes a base de agua, lubricantes de silicona, lubricantes de sabores, 
+                    aceites para masajes eróticos, velas aromáticas, diferentes tipos de gel estimulante, afrodisíacos y relajantes. 
+                    En este sex shop también encontrarás preservativos o condones, productos para la menstruación como la copa menstrual o las braguitas menstruales, 
+                    y otros artículos de higiene y salud íntima. En Tantásia no te faltará de nada para conseguir una vida sexual divertida, activa y saludable. 
+                    Eso sí, sin renunciar a la máxima calidad y sin afectar a tu bolsillo, ya que queremos ser un sex shop accesible para todo el mundo.
+                </p>
+                <h5>La tienda erótica on-line de referencia y líder en productos eróticos</h5>
+                <P>Nuestro sexshop online se ha convertido en referente a nivel nacional y eso es por qué apostar por la calidad / precio en todos nuestros productos 
+                    eróticos, tiene su recompensa. Disponemos de un ADN único, y todos nosotr@s tenemos claro que el sexo es sano, natural y divertido. 
+                    En Tantásia no tenemos cualquier producto erótico, porque nuestra ética nos lo impide. Por ello, en nuestra tienda de juguetes eróticos 
+                    encontrarás los mejores productos del mercado, los artículos más novedosos, y de mayor calidad.
+
+                    Sin duda, hemos apostado por fabricar juguetes eróticos con unos altísimos estándares de calidad, porque creemos que te mereces lo mejor. 
+                    Como sex-shop online de referencia, disponemos de un amplio equipo de expertos en sexualidad y sexólogos, los cuales nos brindan las mejores 
+                    directrices a la hora de fabricar nuestros productos y juguetes. ¡Somos más que un simple sex-shop online! 
+                    Búscanos en las redes sociales o en nuestro canal de Youtube, donde encontrarás los mejores consejos, recomendaciones o usos de nuestros productos, 
+                    entre otros muchos contenidos más.
+                </P>
+            </div>
+        </div>
+        <hr class="my-4"> <!--Crea una línea divisoria-->
+        <div class="container-fluid" style="padding-top: 20px; background-color: white;">
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-5">
+                    <h1 style="text-align: center;">Tantásia</h1>
+                    <img src="../static/img/index/genero.png" alt="Imagen junto al texto principal" width="50px" style="text-align: center;">
+                    <h7 style="text-align: center;">Descubre el arte del placer en nuestra tienda online</h7>
+                    <p style="font-family: Montserrat; text-align: center; font-size: small;">
+                    Fabricamos <strong>los mejores</strong> juguetes eróticos, al mejor precio.
+                    </p>
+                    <p style="font-family: Montserrat; text-align: center; font-size: small;">
+                        ¿Quieres seguir aprendiendo sobre <strong>educación sexual</strong>?
+                    </p>
+                    <p style="font-family: Montserrat; text-align: center; font-size: small;">
+                        Visita nuestras redes sociales, ya somos <strong>más de 7 millones</strong> 🥳 🤩
+                    </p>
+                    <img src="../static/img/index/logo_gobierno.png" alt="Logo Gobierno España" width="100%" style="text-align: center;">
+                    <div class="container-fluid" style="padding-top: 40px; background-color: white;"></div>
+                </div>
+                
+                <div class="col-3"></div>
+            </div>
+        </div>
+    </body>
+</html>

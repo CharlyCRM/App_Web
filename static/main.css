@@ -1,0 +1,26 @@
+.titulo_principal {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif; 
+    font-size: 300%;
+    color: rgb(0, 0, 0);
+}
+
+.producto_destacado {
+    text-align: center;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: rgb(224, 148, 15);
+    font-size: 200%;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif !important; 
+}
+
+td {
+    text-align: center;
+    font-size: x-small;
+}
+
+th {
+    text-align: center;
+}
